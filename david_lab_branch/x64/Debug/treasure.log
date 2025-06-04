@@ -1,29 +1,44 @@
 ﻿cl : command line  warning D9025: overriding '/sdl' with '/GS-'
+  gzip.cpp
+c1xx : fatal  error C1083: Cannot open source file: '..\common\gzip.cpp': No such file or directory
+  multithread.cpp
+c1xx : fatal  error C1083: Cannot open source file: '..\common\multithread.cpp': No such file or directory
+  adder.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  characterization.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  dvfs.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  electrical.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  eval_simulator.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  fpga.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  hashsystem.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  make_sdc.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\make_sdc.cpp(19,16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\make_sdc.cpp(109,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\make_sdc.cpp(110,20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\make_sdc.cpp(197,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\make_sdc.cpp(198,20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  miner.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  miner_experiment.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  misc.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  sha256.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  simulator.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  test.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  tunechip.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  usb.cpp
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
   work.cpp
-  bzlib.lib(bzlib.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
-LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Generating code
-  Finished generating code
-zlib.lib(gzio.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(gzio.obj)' or at ''; linking object as if no debug info
-zlib.lib(deflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(deflate.obj)' or at ''; linking object as if no debug info
-zlib.lib(inflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inflate.obj)' or at ''; linking object as if no debug info
-zlib.lib(crc32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(crc32.obj)' or at ''; linking object as if no debug info
-zlib.lib(zutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(zutil.obj)' or at ''; linking object as if no debug info
-zlib.lib(adler32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(adler32.obj)' or at ''; linking object as if no debug info
-zlib.lib(trees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(trees.obj)' or at ''; linking object as if no debug info
-zlib.lib(infblock.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infblock.obj)' or at ''; linking object as if no debug info
-zlib.lib(inftrees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inftrees.obj)' or at ''; linking object as if no debug info
-zlib.lib(infcodes.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infcodes.obj)' or at ''; linking object as if no debug info
-zlib.lib(infutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infutil.obj)' or at ''; linking object as if no debug info
-zlib.lib(inffast.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inffast.obj)' or at ''; linking object as if no debug info
-bzlib.lib(bzlib.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(bzlib.obj)' or at ''; linking object as if no debug info
-bzlib.lib(decompress.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(decompress.obj)' or at ''; linking object as if no debug info
-bzlib.lib(randtable.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(randtable.obj)' or at ''; linking object as if no debug info
-bzlib.lib(crctable.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(crctable.obj)' or at ''; linking object as if no debug info
-bzlib.lib(compress.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(compress.obj)' or at ''; linking object as if no debug info
-bzlib.lib(huffman.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(huffman.obj)' or at ''; linking object as if no debug info
-bzlib.lib(blocksort.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(blocksort.obj)' or at ''; linking object as if no debug info
-  treasure.vcxproj -> C:\Code\x64\Debug\treasure.exe
+C:\hank_tmp_repo\tmp\treasure_hwang\david_lab_branch\pch.h(16,10): fatal  error C1083: Cannot open include file: 'windefinitions.h': No such file or directory
+  Generating Code...
