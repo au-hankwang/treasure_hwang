@@ -1,0 +1,254 @@
+#ifndef __TEST_H_INCLUDED__
+#define __TEST_H_INCLUDED__
+#include "pch.h"
+#include "helper.h"
+#include "miner.h"
+#include "dvfs.h"
+#include "serial.h"
+#include "usb.h"
+
+//#pragma optimize("", off)
+
+
+struct datatype;
+struct metrictype;
+struct tweaktype;
+class thermalheadtype;
+void PrintMinerMap(short* bist, FILE* fptr);
+// Structure to hold a number and its original index
+struct EnginePerf {
+    int engine;
+    float perf;
+};
+
+struct Bucket {
+    int n;
+    float freq;
+    float hr;
+    float volt;
+    bool isBaseline;
+};
+
+struct Result {
+    float voltage;
+    float freqDiff;
+    float jth;
+};
+
+struct PerfExtremes {
+    std::vector<EnginePerf> all, top25percent, bottom;
+    int total;
+};
+enum autohiterrortype {
+   E_NOTHING, E_TIMEOUT, E_CRC, E_NOUNIQUE
+   };
+
+class Vector3D {
+public:
+    float x, y, z;
+
+    Vector3D() : x(0), y(0), z(0) {}
+    Vector3D(float x, float y, float z) : x(x), y(y), z(z) {}
+};
+
+
+
+class testtype : public dvfstype {
+public:
+   serialtype serial;
+   usbtype usb;
+   boardmodeltype boardmodel;
+   int current_board;
+   int expected_baud;
+   float refclk;
+   float &pll_multiplier;
+   int eval_id;
+   bool VmonNotConfiged;
+   bool zareen;
+   const int method; // 0=model, 1=serial, 2=usb
+   vector<int> found;
+   vector <response_hittype> hitbuffer;
+   vector<headertype> block_headers;
+public:
+
+   testtype(int _method, const vector<topologytype>& _topology = vector<topologytype>(), const systeminfotype& _systeminfo = systeminfotype()) : method(_method), dvfstype(_topology, _systeminfo),pll_multiplier(dvfstype::pll_multiplier) {
+      if (method == 0);
+      //      else if (metthod == 1) serial.Init("\\\\.\\COM17");
+      else if (method == 1) serial.Init("\\\\.\\COM43");
+      else if (method == 2) usb.Init();
+      else FATAL_ERROR;
+      expected_baud = 115200;
+      refclk = 25000000.0;
+      pll_multiplier = 0.0;
+      eval_id = 0;
+      VmonNotConfiged = true;
+      current_board = 0;
+      zareen = false;
+      }
+   // these 4 virtual functions are for dvfstype
+   void ReadWriteConfig(vector<batchtype>& batch)
+      {
+      BatchConfig(batch);
+      }
+   void SetVoltage(float voltage) {
+      if (method == 0)
+         WriteConfig(255, voltage * 1000.0, -1);   // write to fake address to control power supply in presilicon testing
+      else if (method == 2)
+         usb.SetVoltage(S_CORE, voltage * 1000.0);
+      else FATAL_ERROR;
+      }
+   void SetBaudRate(int baud) {
+      if (method == 1) serial.SetBaudRate(baud);
+      else if (method == 2) usb.SetBaudRate(baud);
+      }
+
+   void EnablePowerSwitch(int switch_mask) 
+      {
+      if (method == 2)
+         usb.VddEnable(switch_mask);
+      else FATAL_ERROR;
+      }
+   void DisableSystem() {
+      if (method == 2)
+         usb.VddEnable(0);
+      else FATAL_ERROR;
+      exit(-1);
+      }
+   void Foo() {
+      CommunicationTest();
+      }
+
+   void Delay(int milliSeconds)
+      {
+      TAtype ta("Delay");
+      Sleep(milliSeconds);
+      }
+   float ReadPower()
+      {
+      if (method == 0)
+         return ReadConfig(255, 0) * 0.001;
+      else if (method == 2)
+         return usb.ReadPower();
+      else FATAL_ERROR;
+      return -1.0;
+      }
+   void FanControl(float percentage)
+      {
+      int x = 256 * percentage;
+      x = MINIMUM(x, 255);
+      x = MAXIMUM(x, 0);
+      usb.SetFanSpeed(x);
+      }
+
+   bool BatchConfig(vector<batchtype>& batch, bool quiet=false);
+   void SetBoard(int b)
+      {
+      current_board = b;
+      usb.SetBoard(b);
+      }
+
+   uint32 ReadConfig(int addr, int id = -1) {
+      vector<batchtype> batch;
+      batch.push_back(batchtype().Read(current_board, id, addr));
+      BatchConfig(batch);
+      return batch[0].data;
+      }
+   uint32 ReadWriteConfig(int addr, int data, int id = -1) {
+      vector<batchtype> batch;
+      batch.push_back(batchtype().ReadWrite(current_board, id, addr, data));
+      batch[0].action = CMD_READWRITE;
+      BatchConfig(batch);
+      return batch[0].data;
+      }
+   void WriteConfig(int addr, int data, int id = -1) {
+      vector<batchtype> batch;
+      batch.push_back(batchtype().Write(current_board, id, addr, data));
+      BatchConfig(batch);
+      return;
+      }
+   bool Load(const headertype& header, response_hittype& rsppacket, int ctx, int b, int id = -1);
+   void Load(const headertype& header, int sequence, int difficulty, int ctx);
+   bool GetHit(response_hittype& rsppacket, int b, int id = -1);
+   bool GetHits(vector<response_hittype>& rsppackets, const vector<int>& ids);
+   autohiterrortype GetHitAuto(response_hittype& rsppacket);
+   bool IsAlive(int id);
+   void SetBaud(int baud);
+   void DrainReceiver() { if (method == 1) serial.DrainReceiver(); else if (method == 2) usb.DrainReceiver(); }
+   void RegisterDump(const char* filename);
+   bool FrequencyEstimate(float expected_hashclk = 0.0);
+   bool ReadWriteStress(int id, int iterations = -1); // return true on error
+   void BaudSweep(int id);
+   void BaudTolerance(int id);
+   bool BoardEnumerate();
+   float RunBist(int id);
+   void MineTest();
+   void SingleTest(const headertype &h);
+   void FakeMineTest();
+   void FakeMineTestAuto();
+   void MineTest_Auto();
+   bool HeaderTest(int context, vector<int>& hits);
+   void ReadHeaders(const char* filename);
+   void MineTestStatistics(int seconds, vector<int>& hits, vector<int>& truehits);
+   void NullHeaderTest(const vector<headertype>& headers, int context);
+   void Pll(float f_in_mhz, int id = -1, bool pll1=false, int refdiv=-1);
+   float OnDieVoltage(int id=-1, supplytype supply=S_CORE);
+   float OnDieTemp(int id=-1);
+   float SpeedSearch(float start, float end, int id = -1, float threshold=0);
+   void SpeedEnumerate(float start, float end, int id);
+   void Paredo(const char* filename);
+   void BistParedo();
+   bool TestPoint(float temp, const char* partname, int station, gpiotype& gpio, bool abbreviated, bool turbo);  // returns true for reject
+   bool ControlTest(datatype& data);
+   bool PllTest(datatype& data);
+   void PllData();
+   bool IpTest(datatype& data);
+   bool PinTest(datatype& data, gpiotype &gpio);
+   bool Cdyn(datatype& data, bool abbreviated=false, bool turbo=false);
+   void BistSweep(datatype& data);
+   void IV_Sweep();
+   void Ecurve(const char* filename, const float temp);
+   void Ecurve2(const char* filename, const float temp, const vector<tweaktype>& tweaks);
+   void Shmoo(const char *filename, float temp);
+   void Shmoo_Setting(const char* filename, float temp);
+   void BistShmoo(const char* filename, float temp);
+   void BistShmooTest(const char* filename, float temp);
+   void Asic3();
+   void HashSystem();
+   void QuickDVFS(float supply);
+   void ReadAllVoltages(const topologytype& t);
+   void BistExperiment();
+   void DutyTest(int phase, int* settings, float* speed, bool speedonly=false);
+   void EngineMap(const char* filename, float *map, int phase, int duty_cycle=0);
+   void OldChipMetric(metrictype& metric, float f);
+   void ChipMetric2(metrictype& metric, float f, int phase, int* duty_settings, float *speed);
+   void ChipMetric3(metrictype& metric, float startmV, float f, const vector<tweaktype>& tweaks, int experiment=0);
+   void Shahriar();
+   void ComputeTweaks(const float hit_rate, vector<tweaktype>& tweaks);
+   void ComputeTweaks2(float f, const float hit_rate, vector<tweaktype>& tweaks);
+
+   float ReportEfficiency(float supply, bool quiet = false);
+   void Characterization(bool abbreviated, bool shmoo, bool turbo);
+   void DavidExperiment();
+   void ChipMetric(metrictype& metric, float startmV, float f, int phase, int duty_cycle = 0, bool quick = false);
+   void Simple();
+   void SimpleSystem();
+   float MinMaxTemp();
+   void MinerTweak();
+   void MinerTweak2();
+   void SystemStatistics(const char* label);
+   void CalibrateEvalDVM();
+   void IRTest(int b);
+   void PllExperiment(int b);
+   void PerformanceSweep(vector<topologytype>& topology_system, const char* label, float experiment);
+   void CommunicationTest();
+   float GetVFromBist(int phase, float freq);
+   float GetJthAtV(std::vector<Bucket> bucket, PerfExtremes extremes, float winner_volt, bool ignoreMask);
+   PerfExtremes TestEngineMap(float* map, int phase, int duty_cycle, float topPercent);
+   void MoveToPLL2(std::vector<EnginePerf>);
+   void turnOffBadEngines(std::vector<EnginePerf> badEngines, int maxNum);
+   void SetMask(std::vector<EnginePerf> engines, bool ignore);
+   float PartialRunBist(int id, int chips);
+   int Remove(PerfExtremes extremes);
+   };
+
+#endif //__TEST_H_INCLUDED__

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dvfs.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="electrical.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="eval_simulator.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gzip.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="hashsystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="miner.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="miner_experiment.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\multithread.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="sha256.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="simulator.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="misc.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="usb.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="work.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="fpga.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="make_sdc.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="adder.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="characterization.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="tunechip.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="characterization.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\common.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="dvfs.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="electrical.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\uctl_common\eval_board.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gzip.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libusb\libusb.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="sha256.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\multithread.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="serial.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\zlib.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="miner.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="usb.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\bzlib.lib" />
+    <Library Include="..\x64\Release\lib\libusb-1.0.lib" />
+    <Library Include="..\zlib.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{b90a0bca-d5ea-4807-b67f-1bb816e50e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{3967bae4-d458-4fdf-aec5-a9f00ede8df0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

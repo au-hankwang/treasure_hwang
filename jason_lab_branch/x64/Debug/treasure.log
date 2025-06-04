@@ -1,0 +1,54 @@
+﻿cl : command line  warning D9025: overriding '/sdl' with '/GS-'
+  gzip.cpp
+  multithread.cpp
+  adder.cpp
+  characterization.cpp
+C:\Code_branch_jason\treasure\characterization.cpp(2467,22): warning C4101: 'filename': unreferenced local variable
+  dvfs.cpp
+  electrical.cpp
+  eval_simulator.cpp
+  fpga.cpp
+  hashsystem.cpp
+  make_sdc.cpp
+C:\Code_branch_jason\treasure\make_sdc.cpp(19,16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code_branch_jason\treasure\make_sdc.cpp(109,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code_branch_jason\treasure\make_sdc.cpp(110,20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code_branch_jason\treasure\make_sdc.cpp(197,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code_branch_jason\treasure\make_sdc.cpp(198,20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  miner.cpp
+  miner_experiment.cpp
+  misc.cpp
+  sha256.cpp
+  simulator.cpp
+  test.cpp
+  tunechip.cpp
+  usb.cpp
+  work.cpp
+  Generating Code...
+  bzlib.lib(bzlib.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  Finished generating code
+zlib.lib(gzio.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(gzio.obj)' or at ''; linking object as if no debug info
+zlib.lib(deflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(deflate.obj)' or at ''; linking object as if no debug info
+zlib.lib(inflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inflate.obj)' or at ''; linking object as if no debug info
+zlib.lib(crc32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(crc32.obj)' or at ''; linking object as if no debug info
+zlib.lib(zutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(zutil.obj)' or at ''; linking object as if no debug info
+zlib.lib(adler32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(adler32.obj)' or at ''; linking object as if no debug info
+zlib.lib(trees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(trees.obj)' or at ''; linking object as if no debug info
+zlib.lib(infblock.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infblock.obj)' or at ''; linking object as if no debug info
+zlib.lib(inftrees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inftrees.obj)' or at ''; linking object as if no debug info
+zlib.lib(infcodes.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infcodes.obj)' or at ''; linking object as if no debug info
+zlib.lib(infutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infutil.obj)' or at ''; linking object as if no debug info
+zlib.lib(inffast.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inffast.obj)' or at ''; linking object as if no debug info
+bzlib.lib(bzlib.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(bzlib.obj)' or at ''; linking object as if no debug info
+bzlib.lib(decompress.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(decompress.obj)' or at ''; linking object as if no debug info
+bzlib.lib(randtable.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(randtable.obj)' or at ''; linking object as if no debug info
+bzlib.lib(crctable.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(crctable.obj)' or at ''; linking object as if no debug info
+bzlib.lib(compress.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(compress.obj)' or at ''; linking object as if no debug info
+bzlib.lib(huffman.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(huffman.obj)' or at ''; linking object as if no debug info
+bzlib.lib(blocksort.obj) : warning LNK4099: PDB '' was not found with 'bzlib.lib(blocksort.obj)' or at ''; linking object as if no debug info
+  treasure.vcxproj -> C:\Code_branch_jason\x64\Debug\treasure.exe
