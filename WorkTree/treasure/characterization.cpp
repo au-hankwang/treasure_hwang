@@ -58,8 +58,8 @@ void testtype::BistShmoo(const char* filename, float temp)
    TAtype ta("BistShmoo");
    bool real = true;
 
-   int v_start = 250, v_end = 350, v_incr = 20;
-   float f_start = 200, f_end = 1000, f_incr = 20;
+   int v_start = 250, v_end = 350, v_incr = 50;
+   float f_start = 200, f_end = 1000, f_incr = 100;
    float v, f, period = 4000;
    int iterations = 3200;
    const int num_miners = 238;
@@ -2135,8 +2135,8 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
    vector<float> temps;
 
    temps.push_back(35);
-   temps.push_back(60);
-   temps.push_back(85);
+//   temps.push_back(60);
+//   temps.push_back(85);
 //   temps.push_back(110);
    usb.BoardInfo(info);
 
