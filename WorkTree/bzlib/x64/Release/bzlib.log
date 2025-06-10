@@ -1,0 +1,21 @@
+﻿  blocksort.c
+  bzlib.c
+C:\Code\bzlib\bzlib.c(996,15): warning C4267: '=': conversion from 'size_t' to 'Int32', possible loss of data
+C:\Code\bzlib\bzlib.c(1055,18): warning C4267: '=': conversion from 'size_t' to 'Int32', possible loss of data
+C:\Code\bzlib\bzlib.c(1190,14): warning C4267: '=': conversion from 'size_t' to 'Int32', possible loss of data
+C:\Code\bzlib\bzlib.c(1417,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code\bzlib\bzlib.c(1418,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code\bzlib\bzlib.c(1423,9): warning C4996: 'setmode': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _setmode. See online help for details.
+C:\Code\bzlib\bzlib.c(1425,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Code\bzlib\bzlib.c(1431,12): warning C4996: 'fdopen': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fdopen. See online help for details.
+  compress.c
+C:\Code\bzlib\compress.c(205,23): warning C4244: '=': conversion from '__int64' to 'Int32', possible loss of data
+  crctable.c
+  decompress.c
+  huffman.c
+  randtable.c
+  unzcrash.c
+C:\Code\bzlib\unzcrash.c(92,10): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Code\bzlib\unzcrash.c(86,8): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1556,5): warning MSB8012: TargetPath(C:\Code\x64\Release\bzlib.lib) does not match the Library's OutputFile property value (C:\Code\bzlib.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+  bzlib.vcxproj -> C:\Code\x64\Release\bzlib.lib

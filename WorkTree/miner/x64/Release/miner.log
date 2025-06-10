@@ -1,0 +1,29 @@
+﻿cl : command line  warning D9025: overriding '/sdl' with '/GS-'
+  hashsystem.cpp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  1 of 1638 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    9 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+zlib.lib(gzio.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(gzio.obj)' or at ''; linking object as if no debug info
+zlib.lib(deflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(deflate.obj)' or at ''; linking object as if no debug info
+zlib.lib(inflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inflate.obj)' or at ''; linking object as if no debug info
+zlib.lib(crc32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(crc32.obj)' or at ''; linking object as if no debug info
+zlib.lib(zutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(zutil.obj)' or at ''; linking object as if no debug info
+zlib.lib(adler32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(adler32.obj)' or at ''; linking object as if no debug info
+zlib.lib(trees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(trees.obj)' or at ''; linking object as if no debug info
+zlib.lib(infblock.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infblock.obj)' or at ''; linking object as if no debug info
+zlib.lib(inftrees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inftrees.obj)' or at ''; linking object as if no debug info
+zlib.lib(infcodes.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infcodes.obj)' or at ''; linking object as if no debug info
+zlib.lib(infutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infutil.obj)' or at ''; linking object as if no debug info
+zlib.lib(inffast.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inffast.obj)' or at ''; linking object as if no debug info
+bzlib.lib(bzlib.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(decompress.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(randtable.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(crctable.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(compress.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(huffman.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(blocksort.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+  miner.vcxproj -> C:\Code\x64\Release\miner.exe
