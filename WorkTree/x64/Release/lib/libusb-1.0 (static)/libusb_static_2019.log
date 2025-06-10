@@ -1,0 +1,12 @@
+﻿  core.c
+  descriptor.c
+  events_windows.c
+  hotplug.c
+  io.c
+  strerror.c
+  sync.c
+  threads_windows.c
+  windows_common.c
+  windows_usbdk.c
+  windows_winusb.c
+  libusb_static_2019.vcxproj -> C:\Code\x64\Release\lib\libusb-1.0.lib
