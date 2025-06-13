@@ -1959,26 +1959,26 @@ bool testtype::TestPoint(float temp, const char* partname, int station, gpiotype
    Pll(25, -1);
 
    ChipMetric(data.metric[0], 200, 300.0, 4); // phase 4
-   ChipMetric(data.metric[1], 200, 600.0, 4); // phase 4
-   ChipMetric(data.metric[2], 200, 300.0, 0); // phase 2
-   ChipMetric(data.metric[3], 200, 600.0, 0); // phase 2
-   ChipMetric(data.metric[4], 200, 300.0, 1); // phase 3
-   ChipMetric(data.metric[5], 200, 600.0, 1); // phase 3
-   OldChipMetric(data.metric[6], 300.0); // mission mode phase 2
-   OldChipMetric(data.metric[7], 600.0); // mission mode phase 2
+//   ChipMetric(data.metric[1], 200, 600.0, 4); // phase 4
+//   ChipMetric(data.metric[2], 200, 300.0, 0); // phase 2
+//   ChipMetric(data.metric[3], 200, 600.0, 0); // phase 2
+//   ChipMetric(data.metric[4], 200, 300.0, 1); // phase 3
+//   ChipMetric(data.metric[5], 200, 600.0, 1); // phase 3
+//   OldChipMetric(data.metric[6], 300.0); // mission mode phase 2
+//   OldChipMetric(data.metric[7], 600.0); // mission mode phase 2
    SetVoltage(200);
    char sfilename[256];
    sprintf(sfilename, "shmoo\\%s_enginemap.csv", partname);
    SetVoltage(0);
    SetVoltage(.290);
    EngineMap(sfilename, data.engine_map, 0);
-   EngineMap(sfilename, data.engine_map2, 0,-32);
-   EngineMap(sfilename, data.engine_map, 1);
-   EngineMap(sfilename, data.engine_map, 1, -32);
-   EngineMap(sfilename, data.engine_map, 4);
+//   EngineMap(sfilename, data.engine_map2, 0,-32);
+//   EngineMap(sfilename, data.engine_map, 1);
+//   EngineMap(sfilename, data.engine_map, 1, -32);
+ //  EngineMap(sfilename, data.engine_map, 4);
 
 
-/
+/*
 ////////////////////////////////////////////
 // Leon's experiments
 ////////////////////////////////////////////
@@ -2465,7 +2465,7 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
 
 
       // Find the frequency for the target hit rate - Hank
-      FindFrequencyForHitRate();
+//      FindFrequencyForHitRate();
 
 
       if (false){
