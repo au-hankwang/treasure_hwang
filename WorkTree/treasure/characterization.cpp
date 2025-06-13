@@ -129,7 +129,7 @@ void testtype::BistShmoo(const char* filename, float temp)
                Delay(period * 700 / f);
                usb.BoardInfo(info, true);
                BatchConfig(batch_end);
-               float efficiency100 = info.core_current * v * 0.001 / (f * num_miners * 4 * 1.0e-6);
+               float efficiency100 = info.core_current * v * 0.001 / ( f* num_miners * 4 * 1.0e-6);
                float seconds = batch_end[0].data / 25.0e6;
                float expected = seconds * f * 1.0e6 * num_miners * 4 / ((__int64)1 << 32);
                real_hit = batch_end[2].data / expected;
@@ -794,7 +794,7 @@ void testtype::EngineMap(const char *filename, float *map, int phase, int duty_c
    for (i = 0; i < 8; i++)
       WriteConfig(E_ENGINEMASK + i, 0xffffffff);
    const int num_engines = 1;
-   WriteConfig(E_HASHCONFIG, phase | (1 << 15)| (1 << 16));
+   WriteConfig(E_HASHCONFIG, phase | (1 << 15)| (1 << 16)); //bit 16: reset engine. bit 15: clk_disable.
    WriteConfig(E_HASHCONFIG, phase| (1 << 15));
    WriteConfig(E_BIST, 1);
 
@@ -1977,6 +1977,131 @@ bool testtype::TestPoint(float temp, const char* partname, int station, gpiotype
    EngineMap(sfilename, data.engine_map, 1, -32);
    EngineMap(sfilename, data.engine_map, 4);
 
+
+/
+////////////////////////////////////////////
+// Leon's experiments
+////////////////////////////////////////////
+
+
+
+    std::vector<Result> myResult;
+
+    // Tune the following to balance throughput
+    // Operating point tuning.
+    //////////////////////////////
+    float topPercent = 0.25;
+    float fdelta = 140;
+    const float freq = 1150;
+
+    // TODO (jason)
+    // for a fixed base voltage, balance volt difference and freq multiple, so HR is 
+    // the same for baseline and optmized runs.
+    // Starting point is when baseline HR is at least 97%. Change myVolt*freqMultiple until this is achieved.
+    // Changing freqMultiple will also change the throughput.
+    // Consider calling RunBist(-1) which returns full chip HR.
+    float myVolt = 0.290;
+    float freqMultiple = 1.0;
+    float baselineVoltOffset = 0.0;
+    float optVoltOffset = 0.0;
+
+    // Consider changing PLL1 settings for the fast domain to get more throughput.
+    int baselineClkPhase = 0;
+    int optClkPhase = 0;
+    int baselineClkDC = 0x80a0;
+    int fourPhaseClkDC = 0x0;
+    int optClkDC = 0x0;
+    //////////////////////////////
+
+    float baselineVolt = myVolt + baselineVoltOffset;
+    float optVolt = myVolt + optVoltOffset;
+    float hiFreq = freq + fdelta;
+
+    // Set test voltage
+    SetVoltage(baselineVolt);
+
+    int twoPhase = 0;
+    int fourPhase = 4;
+
+
+    // Here we are finding the fastest engines. The groups are set at 75%, 25% for a
+    // 3:1 ratio. Q: Is this the best ratio?
+    PerfExtremes extremes = TestEngineMap(data.engine_map, twoPhase, baselineClkDC, topPercent);
+    //int N = Remove(extremes);
+    int N = 0;
+    PerfExtremes extremes4p8080 = TestEngineMap(data.engine_map, fourPhase, fourPhaseClkDC, topPercent);
+
+    // Enable all engines
+    for (int i = 0; i < 8; i++) {
+//        WriteConfig(E_ENGINEMASK + i, 0);
+        WriteConfig(E_ENGINEMASK + i, 1);
+    }
+   // WriteConfig(E_ENGINEMASK + i, 1);
+    // Set baseline clock source parameters
+    // Reset settings from previous run
+    WriteConfig(E_DUTY_CYCLE, 0x80a0); // 80-20 duty cycle
+    // Set base freq
+    // Baseline run is at a higher frequency than 1100MHz. Because we have to generate a similar 
+    // throughput as the multi-group test
+
+    WriteConfig(E_HASHCONFIG, 1 << 16); // reset
+    WriteConfig(E_HASHCONFIG, 0);
+    // 2phase: 600-1500
+    // 4phase: 1000-2000
+    // chips done: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+    for (float freq = 1000; freq < 2000; freq += 100) {
+        Pll(freq * freqMultiple, -1, false, 5);
+        // Sleep(1000);
+        Delay(1000);
+
+        // two phase
+        // GetVFromBist(2, freq);
+
+        // four phase
+        WriteConfig(E_DUTY_CYCLE, 0x0);
+        WriteConfig(E_HASHCONFIG, fourPhase);
+        GetVFromBist(4, freq);
+   }
+
+
+    //int maxNum = 5;
+    //buckets[0] = { NUM_ENGINES - int(extremes.bottom.size()), freq * freqMultiple, 0.0, 0.0, true};
+    //turnOffBadEngines(extremes.bottom, maxNum);
+    //jpth2 = GetJthAtV(buckets, extremes, baselineVolt, ignoreMask);
+
+    // 2pll /////////////////////////////
+    //  // Start of optimization run
+    //  SetVoltage(optVolt);
+
+    //  // Restor lower bucket freq
+    //  Pll(freq, -1, false, 5);
+
+    //  // Set High frequency
+    //  Pll(hiFreq, -1, true, 5); // config pll2
+    //  Sleep(1000);
+
+    //  MoveToPLL2(extremes.top25percent);
+
+
+    //  // Print efficiency
+    //  buckets[0] = { NUM_ENGINES - N - int(extremes.top25percent.size()), freq * float(1.0), 0.0, 0.0, true };
+    //  buckets[1] = { int(extremes.top25percent.size()), float(1.0) * hiFreq, 0.0, 0.0, false };
+    //  Sleep(1000);
+    //  ignoreMask = false;
+    //  jpth = GetJthAtV(buckets, extremes, optVolt, ignoreMask);
+
+     //        myResult[i] = { myVolt, fdelta, jpth };
+     //        i += 1;
+     //    }
+     //}
+    ////////////////////////////////////////////
+
+     //std::sort(myResult.begin(), myResult.end(), resCompare);
+
+     //for (const auto& r : myResult) {
+     //    printf("%f, %f, %f\n", r.voltage, r.freqDiff, r.jth);
+     //}
+*/
    const char* filename = "data\\data.bin";
    FILE* fptr = fopen(filename, "ab");
    if (fptr == NULL) {
@@ -2338,7 +2463,9 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
          }
       FrequencyEstimate();
 
-//      Shahriar();
+
+      // Find the frequency for the target hit rate - Hank
+      FindFrequencyForHitRate();
 
 
       if (false){
@@ -2423,7 +2550,7 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
             thermalhead.SetTemp(temp);
 //            CalibrateEvalDVM();
             TestPoint(temp, partname, station, gpio, abbreviated, turbo);
-            if (shmoo || true) {
+            if (shmoo) {
                char filename[128];
                sprintf(filename, "shmoo\\%s.csv", partname);
                BistShmoo(filename, temp);
@@ -2443,6 +2570,76 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
          }
       }
    }
+
+float testtype::FindFrequencyForHitRate(float target_hitrate = 0.95) {
+    TAtype ta("FindFrequencyForHitRate");
+    const int iterations = 320;
+    float start_freq = 600;  // Start at 1000 MHz
+    float end_freq = 1500;    // End at 2000 MHz
+    float step = 100;          // 50 MHz steps
+    float best_freq = 0;
+    float best_hitrate_diff = 1.0;
+    
+    // Configure for two engines
+    WriteConfig(E_HASHCONFIG, 1<<16);  // Reset hash config
+    WriteConfig(E_HASHCONFIG, 0);      // Set phase to 0
+    WriteConfig(E_ENGINEMASK + 0, ~0x3); // Enable first two engines (bits 0,1 = 0)
+    for (int i = 1; i < 8; i++)
+        WriteConfig(E_ENGINEMASK + i, 0xffffffff); // Disable other engines
+    
+    // Set initial voltage
+    SetVoltage(0.320);  // Start at 0.8V
+    Delay(20);
+    
+    // Create batch commands
+    vector<batchtype> batch_start, batch_end;
+    batch_start.push_back(batchtype().Write(0, -1, E_HASHCONFIG, 0 + (1 << 16)));
+    batch_start.push_back(batchtype().Write(0, -1, E_HASHCONFIG, 0));
+    batch_start.push_back(batchtype().Write(0, -1, E_BIST_GOOD_SAMPLES, 0));
+    batch_start.push_back(batchtype().Write(0, -1, E_BIST, 1));
+    
+    batch_end.push_back(batchtype().Read(0, -1, E_BIST_GOOD_SAMPLES));
+    
+    // Sweep frequency
+    for (float freq = start_freq; freq <= end_freq; freq += step) {
+        // Set PLL frequency
+        Pll(freq, -1);
+        Pll(freq, -1, true);
+        
+        // Run BIST
+        BatchConfig(batch_start);
+        WriteConfig(E_BIST, iterations);
+        while (ReadConfig(E_BIST) != 0)
+            ;
+        BatchConfig(batch_end);
+        
+        // Calculate hit rate
+        float hit = batch_end[0].data / (float)(iterations * 2 * 238); // Only 2 engines
+        float hitrate_diff = fabs(hit - target_hitrate);
+        
+        printf("Freq=%.0fMHz Hit=%.3f\n", freq, hit);
+        
+        // Update best frequency if we're closer to target
+        if (hitrate_diff < best_hitrate_diff) {
+            best_hitrate_diff = hitrate_diff;
+            best_freq = freq;
+        }
+        
+        // If we're very close to target, we can stop
+        if (hitrate_diff < 0.01) {
+            break;
+        }
+    }
+    
+    // Restore default settings
+    Pll(25, -1);
+    SetVoltage(0.2);
+    
+    printf("Best frequency for %.2f hit rate: %.0f MHz (hit rate diff: %.3f)\n", 
+           target_hitrate, best_freq, best_hitrate_diff);
+    
+    return best_freq;
+}
 
 
 

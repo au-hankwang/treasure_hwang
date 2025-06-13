@@ -317,6 +317,6 @@ public:
       }
    };
 
-
+float FindFrequencyForHitRate(float target_hitrate = 0.95);
 
 #endif //__CHARACTERIZATION_H_INCLUDED__

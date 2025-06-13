@@ -71,7 +71,7 @@ float testtype::GetVFromBist(int N) {
     }
 
     // Find Min Volt
-    for (float volt = 0.320; volt > 0.270; volt -= 0.001) {
+    for (float volt = 0.320; volt > 0.270; volt -= 0.05) {
         SetVoltage(volt);
         Sleep(1000);
         float res = PartialRunBist(-1, N);
