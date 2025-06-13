@@ -869,6 +869,100 @@ void testtype::EngineMap(const char *filename, float *map, int phase, int duty_c
    fclose(fptr);
    }
 
+void testtype::EngineMapHacked(const char *filename, float *map, int phase, int duty_cycle)
+   {
+      //changes:
+      //1. disable clk_disable
+   TAtype ta("EngineMap2");
+   const int iterations = 10;
+   const float hit = 0.95;
+   int i;
+   headertype h;
+   vector<batchtype> batch_start, batch_end;
+
+   h.AsciiIn("0000002045569767d88d3962a3fbb9a0776f1f97c636f327d8ec0300000000000000000026ed8403a595b6e5fd172050db42eabfe76700aedd17e6b2ce416b92a1c4b7660553aa5d5ca31517a7ad933f");
+   Load(h, 64, 0, -1);
+   usb.OLED_Display("EngineMap\n#\n@");
+
+   Pll(100);
+   WriteConfig(E_VERSION_BOUND, 0xff0000);
+   for (i = 0; i < 8; i++)
+      WriteConfig(E_ENGINEMASK + i, 0xffffffff);
+   const int num_engines = 1;
+   WriteConfig(E_HASHCONFIG, phase | (0 << 15)| (1 << 16)); //bit 16: reset engine. bit 15: clk_disable.
+   WriteConfig(E_HASHCONFIG, phase| (0 << 15));
+   WriteConfig(E_BIST, 1);
+
+   WriteConfig(E_SPEED_INCREMENT, pll_multiplier * 5);
+   WriteConfig(E_SPEED_DELAY, 1000);
+   WriteConfig(E_SPEED_UPPER_BOUND, pll_multiplier * 3000);
+   WriteConfig(E_BIST_THRESHOLD, (iterations - 1) * num_engines * 8 * hit);
+   if (duty_cycle == 0)
+      WriteConfig(E_DUTY_CYCLE, 0);
+   else if (duty_cycle < 0)
+      WriteConfig(E_DUTY_CYCLE, 0x8000 | (-duty_cycle + 0x80));
+   else
+      WriteConfig(E_DUTY_CYCLE, 0x80 | ((duty_cycle + 0x80) << 8));
+   WriteConfig(E_HASHCONFIG, (0 << 15) | phase | (1 << 16));
+   WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+//   WriteConfig(E_HASHCONFIG, (1 << 15) | phase);
+   WriteConfig(E_BIST, 1);
+
+   float average=0.0;
+   
+   for (i = 0; i < 238; i++)
+      {
+      WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+
+      WriteConfig(E_HASHCONFIG, (1 << 15) | phase);
+      WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+      WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+      WriteConfig(E_BIST, iterations + (1 << 31));
+      while (ReadConfig(E_BIST) != 0)
+         ;
+      float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+      map[i] = f;
+      average += f;
+      WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+      }
+   average = average / 238;
+
+   printf("Engine map for hit %.2f phase %d duty=%d temp=%.1fC, Average f=%.0f\n", hit, phase, duty_cycle,OnDieTemp(), average);
+   Pll(25, -1);
+
+   if (filename == NULL) return;
+   FILE* fptr = fopen(filename, "at");
+   if (fptr == NULL) { printf("I couldn't open %s for append\n",filename); return; }
+   fprintf(fptr, "Engine map for hit%.2f phase %d duty=%d temp=%.1fC Average f=%.2f\n", hit, phase, duty_cycle, OnDieTemp(), average);
+   for (int row = 0; row < 19; row++)
+      {
+      for (i = 11; i >= 6; i--) {
+         fprintf(fptr, ",%.0f", map[row * 12 + i]);
+         printf(" %4.0f", map[row * 12 + i]);
+         }
+      fprintf(fptr, ",");
+      printf(" ");
+      for (i = 0; i <= 5; i++) {
+         fprintf(fptr, ",%.0f", map[row * 12 + i]);
+         printf(" %4.0f", map[row * 12 + i]);
+         }
+      fprintf(fptr, "\n");
+      printf("\n");
+      }
+   for (i = 9; i >= 5; i--) {
+      fprintf(fptr, ",%.0f", map[19 * 12 + i]);
+      printf(" %4.0f", map[19 * 12 + i]);
+      }
+   fprintf(fptr, ",,,");
+   printf("           ");
+   for (i = 0; i <= 4; i++) {
+      fprintf(fptr, ",%.0f", map[19 * 12 + i]);
+      printf(" %4.0f", map[19 * 12 + i]);
+      }
+   fprintf(fptr, "\n");
+   printf("\n");
+   fclose(fptr);
+   }
 
 void testtype::Ecurve(const char* filename, const float temp)
    {

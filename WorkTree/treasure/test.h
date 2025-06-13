@@ -181,6 +181,8 @@ public:
    void Shmoo(const char *filename, float temp);
    void Shmoo_Setting(const char* filename, float temp);
    void BistShmoo(const char* filename, float temp);
+   float FindFrequencyForHitRate(float target_hitrate = 0.95);
+
    void BistShmooTest(const char* filename, float temp);
    void Asic3();
    void HashSystem();
@@ -189,6 +191,7 @@ public:
    void BistExperiment();
    void DutyTest(int phase, int* settings, float* speed, bool speedonly=false);
    void EngineMap(const char* filename, float *map, int phase, int duty_cycle=0);
+   void EngineMapHacked(const char* filename, float *map, int phase, int duty_cycle=0);
    void OldChipMetric(metrictype& metric, float f);
    void ChipMetric2(metrictype& metric, float f, int phase, int* duty_settings, float *speed);
    void ChipMetric3(metrictype& metric, float startmV, float f, const vector<tweaktype>& tweaks, int experiment=0);
