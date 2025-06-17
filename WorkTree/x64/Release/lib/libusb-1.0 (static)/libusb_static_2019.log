@@ -9,4 +9,4 @@
   windows_common.c
   windows_usbdk.c
   windows_winusb.c
-  libusb_static_2019.vcxproj -> C:\Code\x64\Release\lib\libusb-1.0.lib
+  libusb_static_2019.vcxproj -> Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0.lib

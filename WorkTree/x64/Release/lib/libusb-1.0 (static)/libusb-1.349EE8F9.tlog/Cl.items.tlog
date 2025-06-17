@@ -1,0 +1,11 @@
+Y:\hank\treasure_hwang\WorkTree\libusb\core.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\core.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\descriptor.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\descriptor.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\os\events_windows.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\events_windows.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\hotplug.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\hotplug.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\io.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\io.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\strerror.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\strerror.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\sync.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\sync.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\os\threads_windows.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\threads_windows.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\os\windows_common.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\windows_common.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\os\windows_usbdk.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\windows_usbdk.obj
+Y:\hank\treasure_hwang\WorkTree\libusb\os\windows_winusb.c;Y:\hank\treasure_hwang\WorkTree\x64\Release\lib\libusb-1.0 (static)\windows_winusb.obj

@@ -1,3 +1,24 @@
 version https://git-lfs.github.com/spec/v1
 oid sha256:466bffceb3b6a922f2a73d678579f8ed35190c2696096451ee3d7cbc8b5e97c9
 size 32327
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 13.74 mA
+SCV Current	  2.48 mA
+Core Current	 3.151 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): 
