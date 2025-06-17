@@ -875,10 +875,8 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
       //1. disable clk_disable
    TAtype ta("EngineMapHacked");
    const int iterations = 50;
-   const int iterations2 = 200;
    const float hit = 0.95;
    int i;
-   int rep;
    headertype h;
    vector<batchtype> batch_start, batch_end;
 
@@ -929,6 +927,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
    }
    average = average / 238;
+/*
    for (int rep = 0; rep < 30; rep++)
    {
        i = 18;
@@ -964,7 +963,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
    }
  
-   /*
+   //*
    for (rep = 0; rep < 100; rep++)
    {
        for (int j = 0; j < 8; j++)
@@ -1061,18 +1060,21 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
    }
    fprintf(fptr, "\n");
    fclose(fptr);
+
    float freqMultiple = 1.0;
    uint32 bist_reg;
+   const int iterations2 = 200;
+   int rep;
+   int engineA = 18;
+   int engineB = 19;
 
-   if (true) {
-
+   if (false) {
        WriteConfig(E_BIST_THRESHOLD, (iterations2)* num_engines * 8);
-       uint32 bist_reg;
        for (float freq = 500; freq < 1500; freq += 25)
        {
            Pll(freq * freqMultiple, -1, false, 5);
 
-           i = 18;
+           i = engineA;
            WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
 
            WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
@@ -1096,7 +1098,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        {
            Pll(freq * freqMultiple, -1, false, 5);
 
-           i = 19;
+           i = engineB;
            WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
 
            WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
@@ -1123,12 +1125,11 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
    const int iterations3 = 20000;
    float freq1 = 1200;
    float freq2 = 800;
-   i = 19;
    int total;
    float hitrate1;
    float hitrate2;
    if (true) {
-       i = 19;
+       i = engineB;
        Pll(freq1 * freqMultiple, -1, false, 5);
        Pll(freq2 * freqMultiple, -1, true, 5);
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
@@ -1140,7 +1141,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
        hitrate1 = (float)bist_reg / ((iterations3)*num_engines * 8);
        total = (iterations3 - 1) * 2 * 8;
-       printf("for engine 19 at freq1, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate1 * 100);
+       printf("for engine %i at freq1, bist_reg %i, total %i, hitrate %f%%\n", i, bist_reg, total, hitrate1 * 100);
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
        WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
        WriteConfig(E_MINER_CONFIG, (i << 16) + (1 << 3));
@@ -1151,8 +1152,8 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
        hitrate2 = (float)bist_reg / ((iterations3)*num_engines * 8);
        total = (iterations3 - 1) * 2 * 8;
-       printf("for engine 19 at freq2, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate2 * 100);
-       printf("engine %i took %d iterations to complete and at freq1 %f, hitrate1 = %.2f%%,  at freq2 %f, hitrate2 = %.2f%% \n\n", i, iterations3, freq1, hitrate1 * 100.0, freq2, hitrate2 * 100.0);
+       printf("for engine %i at freq2, bist_reg %i, total %i, hitrate %f%%\n\n", i, bist_reg, total, hitrate2 * 100);
+//       printf("engine %i took %d iterations to complete and at freq1 %f, hitrate1 = %.2f%%,  at freq2 %f, hitrate2 = %.2f%% \n\n", i, iterations3, freq1, hitrate1 * 100.0, freq2, hitrate2 * 100.0);
        WriteConfig(E_MINER_CONFIG, (i << 16) + (0 << 3));
    }
 //////
