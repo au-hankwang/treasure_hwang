@@ -1,67 +1,32 @@
 ﻿cl : command line  warning D9025: overriding '/sdl' with '/GS-'
   characterization.cpp
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1193,28): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1197,8): error C2065: 'hitrate1': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1197,39): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1198,8): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1198,17): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1199,90): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1199,97): error C2065: 'hitrate1': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1204,28): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1208,8): error C2065: 'hitrate2': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1208,39): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1209,8): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1209,17): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1210,90): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1210,97): error C2065: 'hitrate2': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1211,108): error C2065: 'freq1': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1211,115): error C2065: 'hitrate1': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1211,133): error C2065: 'freq1': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1211,140): error C2065: 'hitrate2': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1222,28): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1226,8): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1226,17): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1227,45): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1228,103): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1239,28): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1243,8): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1243,17): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1244,8): error C2065: 'hitrate3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1244,39): error C2065: 'iterations3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1245,107): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1245,114): error C2065: 'hitrate3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1256,8): error C2373: 'iterations': redefinition; different type modifiers
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(877,14): message : see declaration of 'iterations'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): error C2672: 'begin': no matching overloaded function found
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\xutility(1589,27): message : could be '_Ty *std::begin(_Ty (&)[_Size]) noexcept'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : '_Ty *std::begin(_Ty (&)[_Size]) noexcept': could not deduce template argument for '_Ty (&)[_Size]' from 'const int'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\xutility(1571,30): message : or       'unknown-type std::begin(const _Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : Failed to specialize function template 'unknown-type std::begin(const _Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : With the following template arguments:
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : '_Container=int'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\xutility(1565,30): message : or       'unknown-type std::begin(_Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : Failed to specialize function template 'unknown-type std::begin(_Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : With the following template arguments:
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : '_Container=const int'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\initializer_list(55,35): message : or       'const _Elem *std::begin(std::initializer_list<_Elem>) noexcept'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : 'const _Elem *std::begin(std::initializer_list<_Elem>) noexcept': could not deduce template argument for 'std::initializer_list<_Elem>' from 'const int'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): error C2672: 'end': no matching overloaded function found
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\xutility(1594,27): message : could be '_Ty *std::end(_Ty (&)[_Size]) noexcept'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : '_Ty *std::end(_Ty (&)[_Size]) noexcept': could not deduce template argument for '_Ty (&)[_Size]' from 'const int'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\xutility(1583,30): message : or       'unknown-type std::end(const _Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : Failed to specialize function template 'unknown-type std::end(const _Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : With the following template arguments:
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : '_Container=int'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\xutility(1577,30): message : or       'unknown-type std::end(_Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : Failed to specialize function template 'unknown-type std::end(_Container &) noexcept(<expr>)'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : With the following template arguments:
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : '_Container=const int'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\initializer_list(60,35): message : or       'const _Elem *std::end(std::initializer_list<_Elem>) noexcept'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,29): message : 'const _Elem *std::end(std::initializer_list<_Elem>) noexcept': could not deduce template argument for 'std::initializer_list<_Elem>' from 'const int'
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,41): error C3536: '<begin>$L0': cannot be used before it is initialized
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,41): error C3536: '<end>$L0': cannot be used before it is initialized
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1258,39): error C2100: illegal indirection
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1270,16): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1271,16): error C2065: 'hitrate3': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1272,134): error C2065: 'total': undeclared identifier
-C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(1272,141): error C2065: 'hitrate3': undeclared identifier
+C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(914,51): warning C4101: 'engine_mapB_pll2': unreferenced local variable
+C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(881,8): warning C4101: 'rep': unreferenced local variable
+C:\hank_repo\treasure_hwang\WorkTree\treasure\characterization.cpp(2886,18): warning C4101: 'm': unreferenced local variable
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  0 of 1431 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+zlib.lib(gzio.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(gzio.obj)' or at ''; linking object as if no debug info
+zlib.lib(deflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(deflate.obj)' or at ''; linking object as if no debug info
+zlib.lib(inflate.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inflate.obj)' or at ''; linking object as if no debug info
+zlib.lib(crc32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(crc32.obj)' or at ''; linking object as if no debug info
+zlib.lib(zutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(zutil.obj)' or at ''; linking object as if no debug info
+zlib.lib(adler32.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(adler32.obj)' or at ''; linking object as if no debug info
+zlib.lib(trees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(trees.obj)' or at ''; linking object as if no debug info
+zlib.lib(infblock.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infblock.obj)' or at ''; linking object as if no debug info
+zlib.lib(inftrees.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inftrees.obj)' or at ''; linking object as if no debug info
+zlib.lib(infcodes.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infcodes.obj)' or at ''; linking object as if no debug info
+zlib.lib(infutil.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(infutil.obj)' or at ''; linking object as if no debug info
+zlib.lib(inffast.obj) : warning LNK4099: PDB '' was not found with 'zlib.lib(inffast.obj)' or at ''; linking object as if no debug info
+bzlib.lib(bzlib.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(decompress.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(randtable.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(crctable.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(compress.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(huffman.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+bzlib.lib(blocksort.obj) : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+  treasure.vcxproj -> C:\hank_repo\treasure_hwang\WorkTree\x64\Release\treasure.exe

@@ -1114,48 +1114,21 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
            //       average += f;
     //       printf(" %4.0f\n", f);
            WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
-
-
-           FILE* fptr = fopen(filename, "at");
-           if (fptr == NULL) { printf("I couldn't open %s for append\n", filename); return; }
-           fprintf(fptr, "Engine map for hit%.2f phase %d duty=%d temp=%.1fC Average f=%.2f\n", hit, phase, duty_cycle, OnDieTemp(), average);
-
-           WriteConfig(E_BIST_THRESHOLD, (iterations2)*num_engines * 8);
-           for (float freq = 500; freq < 1500; freq += 25)
-           {
-               Pll(freq * freqMultiple, -1, false, 5);
-
-               i = 18;
-               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
-
-               WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
-               WriteConfig(E_BIST_GOOD_SAMPLES, 0);
-               //       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
-               WriteConfig(E_BIST, iterations2);
-               while (ReadConfig(E_BIST) != 0)
-                   ;
-               bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
-               float hitrate = (float)bist_reg / ((iterations2)*num_engines * 8);
-               printf("engine %i took %d iterations to complete and at freq %f, hitrate = %.2f%%    num_of_engines: %d \n", i, iterations2, freq, hitrate * 100.0, num_engines);
-
-               //       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
-               //       map[i] = f;
-               //       average += f;
-        //       printf(" %4.0f\n", f);
-               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
-           }
        }
    }
 //////
 // test PLL switch
 // show hr for 19 at freq1, freq2, respectively
 //////
+   const int iterations3 = 20000;
+   float freq1 = 1200;
+   float freq2 = 800;
+   i = 19;
+   int total;
+   float hitrate1;
+   float hitrate2;
    if (true) {
-       const int iterations3 = 20000;
-       float freq1 = 1200;
-       float freq2 = 800;
        i = 19;
-       int total;
        Pll(freq1 * freqMultiple, -1, false, 5);
        Pll(freq2 * freqMultiple, -1, true, 5);
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
@@ -1165,7 +1138,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        while (ReadConfig(E_BIST) != 0)
            ;
        bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
-       float hitrate1 = (float)bist_reg / ((iterations3)*num_engines * 8);
+       hitrate1 = (float)bist_reg / ((iterations3)*num_engines * 8);
        total = (iterations3 - 1) * 2 * 8;
        printf("for engine 19 at freq1, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate1 * 100);
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
@@ -1176,7 +1149,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
        while (ReadConfig(E_BIST) != 0)
            ;
        bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
-       float hitrate2 = (float)bist_reg / ((iterations3)*num_engines * 8);
+       hitrate2 = (float)bist_reg / ((iterations3)*num_engines * 8);
        total = (iterations3 - 1) * 2 * 8;
        printf("for engine 19 at freq2, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate2 * 100);
        printf("engine %i took %d iterations to complete and at freq1 %f, hitrate1 = %.2f%%,  at freq2 %f, hitrate2 = %.2f%% \n\n", i, iterations3, freq1, hitrate1 * 100.0, freq2, hitrate2 * 100.0);
@@ -1213,6 +1186,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
 //////
 // show hr for 18, 19 at freq1, combined
 //////
+   float hitrate3;
    if (true) {
        WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ ((1 << 18) | (1 << 19)));
        WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
@@ -1224,7 +1198,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
            ;
        bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
        total = (iterations3 - 1) * 2 * 8;
-       float hitrate3 = (float)bist_reg / ((iterations3) * 2 * 8);
+       hitrate3 = (float)bist_reg / ((iterations3) * 2 * 8);
        printf("for both engine 18 & 19 at freq1, bist_reg %i, total %i, hitrate3 %f%%\n\n", bist_reg, total, hitrate3 * 100);
    }
 //////
@@ -1253,7 +1227,8 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
 //////
 // Error bar quantification for hitrate @ 20, 200, 2000, 20000, 200000 iteration
 //////
-   int iterations[] = { 20, 200, 2000, 20000, 200000 };
+//   int iterations[] = { 20, 200, 2000, 20000, 200000 };
+   /*
    if (true) {
        for (int iteration : iterations) {
            for (int rep = 0; rep < 30; rep++)
@@ -1274,6 +1249,7 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
            }
        }
    }
+   */
 //////
 // Freq vs hr for all engine map
 //////
