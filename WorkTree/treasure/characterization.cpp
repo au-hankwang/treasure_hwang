@@ -873,10 +873,12 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
    {
       //changes:
       //1. disable clk_disable
-   TAtype ta("EngineMap2");
-   const int iterations = 10;
+   TAtype ta("EngineMapHacked");
+   const int iterations = 50;
+   const int iterations2 = 200;
    const float hit = 0.95;
    int i;
+   int rep;
    headertype h;
    vector<batchtype> batch_start, batch_end;
 
@@ -909,24 +911,97 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
    WriteConfig(E_BIST, 1);
 
    float average=0.0;
-   
+   float engine_mapA[100], engine_mapB_pll1[100], engine_mapB_pll2[100];
    for (i = 0; i < 238; i++)
-      {
-      WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+   {
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
 
-      WriteConfig(E_HASHCONFIG, (1 << 15) | phase);
-      WriteConfig(E_BIST_GOOD_SAMPLES, 0);
-      WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
-      WriteConfig(E_BIST, iterations + (1 << 31));
-      while (ReadConfig(E_BIST) != 0)
-         ;
-      float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
-      map[i] = f;
-      average += f;
-      WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
-      }
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+       WriteConfig(E_BIST, iterations + (1 << 31));
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+       map[i] = f;
+       average += f;
+//       printf(" %4.0f\n", f);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+   }
    average = average / 238;
+   for (int rep = 0; rep < 30; rep++)
+   {
+       i = 18;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
 
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+       WriteConfig(E_BIST, iterations2 + (1 << 31));
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+       //       map[i] = f;
+       //       average += f;
+       printf(" %4.0f\n", f);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+   }
+   for (int rep = 0; rep < 30; rep++)
+   {
+       i = 19;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+       WriteConfig(E_BIST, iterations2 + (1 << 31));
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+       //       map[i] = f;
+       //       average += f;
+       printf(" %4.0f\n", f);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+   }
+ 
+   /*
+   for (rep = 0; rep < 100; rep++)
+   {
+       for (int j = 0; j < 8; j++)
+           WriteConfig(E_ENGINEMASK + j, 0xffffffff);
+       i = 18;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase | (1 << 16));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+       WriteConfig(E_BIST, iterations + (1 << 31));
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;  
+       engine_mapA[rep] = f;
+       printf(" %4.0f\n", f);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+   }
+   //
+   for (rep = 0; rep < 100; rep++)
+   {
+       i = 19;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase | (1 << 16));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+       WriteConfig(E_BIST, iterations + (1 << 31));
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+       engine_mapB_pll1[rep] = f;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+   }
+*/
+   //
    printf("Engine map for hit %.2f phase %d duty=%d temp=%.1fC, Average f=%.0f\n", hit, phase, duty_cycle,OnDieTemp(), average);
    Pll(25, -1);
 
@@ -961,7 +1036,273 @@ void testtype::EngineMapHacked(const char *filename, float *map, int phase, int 
       }
    fprintf(fptr, "\n");
    printf("\n");
+   fprintf(fptr, "\nAll map values:\n");
+   for (i = 0; i < 238; i++) {
+       fprintf(fptr, "%.0f", map[i]);
+       if (i < 237) {
+           fprintf(fptr, ",");
+       }
+   }
+   fprintf(fptr, "\n");
+   fprintf(fptr, "\n engine A values:\n");
+   for (i = 0; i < 100; i++) {
+       fprintf(fptr, "%.0f", engine_mapA[i]);
+       if (i < 99) {
+           fprintf(fptr, ",");
+       }
+   }
+   fprintf(fptr, "\n");
+   fprintf(fptr, "\nengine B pll1 values:\n");
+   for (i = 0; i < 100; i++) {
+       fprintf(fptr, "%.0f", engine_mapB_pll1[i]);
+       if (i < 99) {
+           fprintf(fptr, ",");
+       }
+   }
+   fprintf(fptr, "\n");
    fclose(fptr);
+   float freqMultiple = 1.0;
+   uint32 bist_reg;
+
+   if (true) {
+
+       WriteConfig(E_BIST_THRESHOLD, (iterations2)* num_engines * 8);
+       uint32 bist_reg;
+       for (float freq = 500; freq < 1500; freq += 25)
+       {
+           Pll(freq * freqMultiple, -1, false, 5);
+
+           i = 18;
+           WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+
+           WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+           WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+           //       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+           WriteConfig(E_BIST, iterations2);
+           while (ReadConfig(E_BIST) != 0)
+               ;
+           bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+           float hitrate = (float)bist_reg / ((iterations2) * num_engines * 8);
+           printf("engine %i took %d iterations to complete and at freq %f, hitrate = %.2f%%    num_of_engines: %d \n", i, iterations2, freq, hitrate * 100.0, num_engines);
+
+           //       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+           //       map[i] = f;
+           //       average += f;
+    //       printf(" %4.0f\n", f);
+           WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+       }
+
+       for (float freq = 500; freq < 1500; freq += 25)
+       {
+           Pll(freq * freqMultiple, -1, false, 5);
+
+           i = 19;
+           WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+
+           WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+           WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+           //       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+           WriteConfig(E_BIST, iterations2);
+           while (ReadConfig(E_BIST) != 0)
+               ;
+           bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+           float hitrate = (float)bist_reg / ((iterations2)*num_engines * 8);
+           printf("engine %i took %d iterations to complete and at freq %f, hitrate = %.2f%%    num_of_engines: %d \n", i, iterations2, freq, hitrate * 100.0, num_engines);
+
+           //       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+           //       map[i] = f;
+           //       average += f;
+    //       printf(" %4.0f\n", f);
+           WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+
+
+           FILE* fptr = fopen(filename, "at");
+           if (fptr == NULL) { printf("I couldn't open %s for append\n", filename); return; }
+           fprintf(fptr, "Engine map for hit%.2f phase %d duty=%d temp=%.1fC Average f=%.2f\n", hit, phase, duty_cycle, OnDieTemp(), average);
+
+           WriteConfig(E_BIST_THRESHOLD, (iterations2)*num_engines * 8);
+           for (float freq = 500; freq < 1500; freq += 25)
+           {
+               Pll(freq * freqMultiple, -1, false, 5);
+
+               i = 18;
+               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+
+               WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+               WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+               //       WriteConfig(E_PLLFREQ, 100.0 * pll_multiplier);
+               WriteConfig(E_BIST, iterations2);
+               while (ReadConfig(E_BIST) != 0)
+                   ;
+               bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+               float hitrate = (float)bist_reg / ((iterations2)*num_engines * 8);
+               printf("engine %i took %d iterations to complete and at freq %f, hitrate = %.2f%%    num_of_engines: %d \n", i, iterations2, freq, hitrate * 100.0, num_engines);
+
+               //       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+               //       map[i] = f;
+               //       average += f;
+        //       printf(" %4.0f\n", f);
+               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+           }
+       }
+   }
+//////
+// test PLL switch
+// show hr for 19 at freq1, freq2, respectively
+//////
+   if (true) {
+       const int iterations3 = 20000;
+       float freq1 = 1200;
+       float freq2 = 800;
+       i = 19;
+       int total;
+       Pll(freq1 * freqMultiple, -1, false, 5);
+       Pll(freq2 * freqMultiple, -1, true, 5);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_BIST, iterations3);
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+       float hitrate1 = (float)bist_reg / ((iterations3)*num_engines * 8);
+       total = (iterations3 - 1) * 2 * 8;
+       printf("for engine 19 at freq1, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate1 * 100);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_MINER_CONFIG, (i << 16) + (1 << 3));
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_BIST, iterations3);
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+       float hitrate2 = (float)bist_reg / ((iterations3)*num_engines * 8);
+       total = (iterations3 - 1) * 2 * 8;
+       printf("for engine 19 at freq2, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate2 * 100);
+       printf("engine %i took %d iterations to complete and at freq1 %f, hitrate1 = %.2f%%,  at freq2 %f, hitrate2 = %.2f%% \n\n", i, iterations3, freq1, hitrate1 * 100.0, freq2, hitrate2 * 100.0);
+       WriteConfig(E_MINER_CONFIG, (i << 16) + (0 << 3));
+   }
+//////
+// show hr for 18, 19 at freq1, respectively
+//////
+   if (true) {
+       i = 18;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_BIST, iterations3);
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+       hitrate1 = (float)bist_reg / ((iterations3)*num_engines * 8);
+       total = (iterations3 - 1) * 2 * 8;
+       printf("for engine 18 at freq1, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate1 * 100);
+       i = 19;
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_BIST, iterations3);
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+       hitrate2 = (float)bist_reg / ((iterations3)*num_engines * 8);
+       total = (iterations3 - 1) * 2 * 8;
+       printf("for engine 19 at freq1, bist_reg %i, total %i, hitrate %f%%\n", bist_reg, total, hitrate2 * 100);
+       printf("engine 18 at freq1 %f, hitrate1 = %.2f%%,  engine 19 at freq1 %f, hitrate2 = %.2f%%, \n\n", freq1, hitrate1 * 100.0, freq1, hitrate2 * 100.0);
+   }
+//////
+// show hr for 18, 19 at freq1, combined
+//////
+   if (true) {
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ ((1 << 18) | (1 << 19)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_MINER_CONFIG, (18 << 16) + (0 << 3));
+       WriteConfig(E_MINER_CONFIG, (19 << 16) + (0 << 3));
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_BIST, iterations3);
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+       total = (iterations3 - 1) * 2 * 8;
+       float hitrate3 = (float)bist_reg / ((iterations3) * 2 * 8);
+       printf("for both engine 18 & 19 at freq1, bist_reg %i, total %i, hitrate3 %f%%\n\n", bist_reg, total, hitrate3 * 100);
+   }
+//////
+// show hr for 18 at freq1, 19 at freq2
+//////
+   if (true) {
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ ((1 << 18) | (1 << 19)));
+       WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+       WriteConfig(E_MINER_CONFIG, (18 << 16) + (0 << 3));
+       WriteConfig(E_MINER_CONFIG, (19 << 16) + (1 << 3));
+       WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+       WriteConfig(E_BIST, iterations3);
+       while (ReadConfig(E_BIST) != 0)
+           ;
+       bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+       total = (iterations3 - 1) * 2 * 8;
+       hitrate3 = (float)bist_reg / ((iterations3) * 2 * 8);
+       printf("for engine 18 at freq1 & 19 at freq2, bist_reg %i, total %i, hitrate3 %f%%\n\n", bist_reg, total, hitrate3 * 100);
+
+       //       float f = ReadConfig(E_PLLFREQ) / pll_multiplier;
+       //       map[i] = f;
+       //       average += f;
+    //       printf(" %4.0f\n", f);
+       WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+   }
+//////
+// Error bar quantification for hitrate @ 20, 200, 2000, 20000, 200000 iteration
+//////
+   int iterations[] = { 20, 200, 2000, 20000, 200000 };
+   if (true) {
+       for (int iteration : iterations) {
+           for (int rep = 0; rep < 30; rep++)
+           {
+               i = 19;
+               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+               WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+               WriteConfig(E_MINER_CONFIG, (i << 16) + (0 << 3));
+               WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+               WriteConfig(E_BIST, iteration);
+               while (ReadConfig(E_BIST) != 0)
+                   ;
+               bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+               total = (iteration) * 2 * 8;
+               hitrate3 = (float)bist_reg / ((iteration) * 2 * 8);
+               printf("for engine 19 at freq1=1200MHz, iteration %i, bist_reg %i, total %i, hitrate3 %f%%\n\n", iteration, bist_reg, total, hitrate3 * 100);
+               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff);
+           }
+       }
+   }
+//////
+// Freq vs hr for all engine map
+//////
+   WriteConfig(E_HASHCONFIG, phase | (0 << 15) | (1 << 16)); //bit 16: reset engine. bit 15: clk_disable.
+   if (true) {
+       for (float freq = 600; freq < 1400; freq += 25)
+       {
+           Pll(freq * freqMultiple, -1, false, 5);
+           for (i = 0; i < 238; i++)
+           {
+               WriteConfig(E_ENGINEMASK + (i / 32), 0xffffffff ^ (1 << (i & 31)));
+               WriteConfig(E_HASHCONFIG, (0 << 15) | phase);
+               WriteConfig(E_BIST_GOOD_SAMPLES, 0);
+               WriteConfig(E_BIST, iterations2);
+               while (ReadConfig(E_BIST) != 0)
+                   ;
+               bist_reg = ReadConfig(E_BIST_GOOD_SAMPLES);
+               float hitrate = (float)bist_reg / ((iterations2)*num_engines * 8);
+               printf("engine %i took %d iterations to complete and at freq %f, hitrate = %.2f%%\n", i, iterations2, freq, hitrate * 100.0);
+
+           }   
+       }
+   }
+//   FILE* fptr = fopen(filename, "at");
+ //  if (fptr == NULL) { printf("I couldn't open %s for append\n", filename); return; }
+  // fprintf(fptr, "Engine map for hit%.2f phase %d duty=%d temp=%.1fC Average f=%.2f\n", hit, phase, duty_cycle, OnDieTemp(), average);
+   //fprintf(fptr, ",%.0f", map[row * 12 + i]);
+   //fclose(fptr);
+
    }
 
 void testtype::Ecurve(const char* filename, const float temp)
@@ -2046,13 +2387,13 @@ bool testtype::TestPoint(float temp, const char* partname, int station, gpiotype
    printf("Voltage = %.1fmV Temp=%.1fC IDDQ=%.2fA Normalized to 85C=%.2fA\n", odv * 1000.0, data.iddq_temp, data.iddq, iddq_normalized);
 
    SetVoltage(0);
-   reject = ControlTest(data) || reject;
-   reject = PllTest(data) || reject;
+//   reject = ControlTest(data) || reject; //Hank
+//   reject = PllTest(data) || reject; //Hank
    //   reject = PinTest(data, gpio) || reject;
-   reject = IpTest(data) || reject;    // do ip test last so there's more time for thermal head to settle, but before cranking up miners
+//   reject = IpTest(data) || reject;    // do ip test last so there's more time for thermal head to settle, but before cranking up miners //Hank
    Pll(25, -1);
 
-   ChipMetric(data.metric[0], 200, 300.0, 4); // phase 4
+//   ChipMetric(data.metric[0], 200, 300.0, 4); // phase 4
 //   ChipMetric(data.metric[1], 200, 600.0, 4); // phase 4
 //   ChipMetric(data.metric[2], 200, 300.0, 0); // phase 2
 //   ChipMetric(data.metric[3], 200, 600.0, 0); // phase 2
@@ -2065,8 +2406,9 @@ bool testtype::TestPoint(float temp, const char* partname, int station, gpiotype
    sprintf(sfilename, "shmoo\\%s_enginemap.csv", partname);
    SetVoltage(0);
    SetVoltage(.290);
-   EngineMap(sfilename, data.engine_map, 0);
-//   EngineMap(sfilename, data.engine_map2, 0,-32);
+   EngineMapHacked(sfilename, data.engine_map, 0);
+   //EngineMap(sfilename, data.engine_map, 0);
+   //   EngineMap(sfilename, data.engine_map2, 0,-32);
 //   EngineMap(sfilename, data.engine_map, 1);
 //   EngineMap(sfilename, data.engine_map, 1, -32);
  //  EngineMap(sfilename, data.engine_map, 4);
@@ -2555,7 +2897,7 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
          printf("ERROR: Asic did not respond to aliveness test with id=%x.\n", eval_id);
          reject = true;
          }
-      FrequencyEstimate();
+//      FrequencyEstimate(); - Hank
 
 
       // Find the frequency for the target hit rate - Hank
@@ -2575,17 +2917,17 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
          tweak3.back().pll2_map[i] = 0x11111111;
       ChipMetric3(m, 260, 450, tweak3);*/
 
-      ComputeTweaks2(1200, 0.95, tweaks);
+   //   ComputeTweaks2(1200, 0.95, tweaks);
       
       tweaks2 = tweaks;
       for (i = 0; i < tweaks2.size(); i++)
          tweaks2[i].pll2_ratio = tweaks2[i].pll_ratio = 0;
 
-      ChipMetric3(m, 260, 600, tweaks);
-      ChipMetric3(m, 260, 600, tweaks2);
-      ChipMetric3(m, 260, 600, tweaks);
-      ChipMetric(m, 260, 600, 0, -32);
-      ChipMetric(m, 260, 600, 4, 0);
+//      ChipMetric3(m, 260, 600, tweaks);
+ //     ChipMetric3(m, 260, 600, tweaks2);
+  //    ChipMetric3(m, 260, 600, tweaks);
+    //  ChipMetric(m, 260, 600, 0, -32);
+   //   ChipMetric(m, 260, 600, 4, 0);
       return;
       sprintf(filename, "%s_mixed.csv", partname);
       Ecurve2(filename, -1, tweaks);
@@ -2665,7 +3007,7 @@ void testtype::Characterization(bool abbreviated, bool shmoo, bool turbo)
       }
    }
 
-float testtype::FindFrequencyForHitRate(float target_hitrate = 0.95) {
+float testtype::FindFrequencyForHitRate(float target_hitrate) {
     TAtype ta("FindFrequencyForHitRate");
     const int iterations = 320;
     float start_freq = 600;  // Start at 1000 MHz
