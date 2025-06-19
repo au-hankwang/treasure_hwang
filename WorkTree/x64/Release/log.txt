@@ -541,4 +541,224 @@ Core Voltage	 0.000 V
 Pad current	 0.000 mA
 
 
-Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): 
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.14 mA
+SCV Current	  2.47 mA
+Core Current	 3.138 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.14 mA
+SCV Current	  2.47 mA
+Core Current	 3.141 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 13.84 mA
+SCV Current	 14.55 mA
+Core Current	 4.021 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 13.81 mA
+SCV Current	 14.41 mA
+Core Current	 3.602 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.40 mA
+SCV Current	  2.60 mA
+Core Current	 3.602 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 13.46 mA
+SCV Current	  2.57 mA
+Core Current	 3.651 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing (default to 2)]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 13.98 mA
+SCV Current	 14.43 mA
+Core Current	 3.662 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing (default to 2)]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.09 mA
+SCV Current	 10.90 mA
+Core Current	 6.962 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing (default to 2)]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.07 mA
+SCV Current	 10.90 mA
+Core Current	 6.952 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing (default to 2)]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.05 mA
+SCV Current	  2.53 mA
+Core Current	 3.639 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing (default to 2)]: Enter any additional temperatures you want to add to the program(just enter to continue): Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+Auradine ucontroller has been found.	Eval 1 asic, Jul  5 2024 10:24:51
+
+
+Board Temp	 0.000 C
+Supply Temp	27.000 C
+Supply Vin	11.920 V
+Supply Iin	 0.000 A
+Supply Pin	 0.000 W
+Supply Vout	 0.000 V
+Supply Iout	 0.000 A
+Supply Pout	 0.000 W
+IO Current	 14.24 mA
+SCV Current	  2.52 mA
+Core Current	 3.612 A
+Core Voltage	 0.000 V
+Pad current	 0.000 mA
+
+
+Is the board at a lab station? [1(thermalhead),2(thermalhead),3+ or nothing (default to 2)]: Enter any additional temperatures you want to add to the program(just enter to continue): 
